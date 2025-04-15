@@ -1,4 +1,4 @@
-# 树状数组 (Fenwick Tree / Binary Indexed Tree) 详解
+# 树状数组/二元索引树 (Fenwick Tree / Binary Indexed Tree) 详解
 
 ## 1. 什么是树状数组？
 
@@ -45,6 +45,8 @@ lowbit(x) = x & (-x)
     *   `x = 13` (二进制 `1101`)。最右边的 '1' 在第 0 位，代表的值是 2<sup>0</sup> = 1。 `lowbit(13) = 13 & (-13) = 1101 & 0011 = 0001` (二进制)，结果是 **1**。
 
 *   **重要区分：** `lowbit(x)` 计算的是最右边 '1' **所代表的数值**，这与 **最低有效位 (Least Significant Bit, LSB)** 不同。LSB 指的是二进制数最右边的那一位 (2<sup>0</sup> 位)。只有当 `x` 是奇数时，`lowbit(x)` 才等于 1，此时最右边的 '1' 恰好是 LSB。
+
+**备注：** 一个形式相似的位运算是 **`x & (x-1)`**，它清除 `x` 中最右边的那个 '1'，即把右边那个 '1' 所在的 bit 位置 0。所以，恒有 `(x & (-x)) + (x & (x-1)) == x`。另外，无论 `x` 是正整数、零、负整数， `x & (-x)` 和 `x & (x-1)` 的特性都成立。
 
 ### `tree[x]` 的管辖范围
 
@@ -193,7 +195,7 @@ public:
 
   // 区间和查询：计算 A[l] + ... + A[r]
   // 时间复杂度: O(log n)
-  long long queryRange(int l, int r) {
+  long long query_range(int l, int r) {
     if (l > r) {
       return 0;
     }
@@ -209,6 +211,8 @@ public:
 
 // === 示例用法 ===
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 #include <cassert>
 
 int main() {
@@ -220,11 +224,19 @@ int main() {
   FenwickTree ft(n_elements);
   ft.build(A);
 
+  // 从 Fenwick Tree 恢复原始数组
+  std::vector<int> restored_A(ft.size() + 1); // 1-based indexing for original array
+                                              // restored_A[1] to restored_A[n] contain the restored values
+  for (int i = 1; i <= ft.size(); ++i) {
+    restored_A[i] = ft.query_range(i, i);
+  }
+  assert(std::equal(std::next(restored_A.cbegin()), restored_A.cend(), std::next(A.cbegin())));
+
   // 查询前缀和 sum(1..3) = A[1]+A[2]+A[3] = 1 + 3 + (-2) = 2
   assert(ft.query(3) == 2);
 
   // 查询区间和 sum(2..4) = A[2]+A[3]+A[4] = 3 + (-2) + 5 = 6
-  assert(ft.queryRange(2, 4) == 6);
+  assert(ft.query_range(2, 4) == 6);
 
   // 更新 A[3]，将 A[3] 增加 3 (从 -2 变为 1)
   ft.update(3, 3);
@@ -232,7 +244,7 @@ int main() {
   // 再次查询前缀和 sum(1..3) = 1 + 3 + 1 = 5
   assert(ft.query(3) == 5);
   // 再次查询区间和 sum(2..4) = 3 + 1 + 5 = 9
-  assert(ft.queryRange(2, 4) == 9);
+  assert(ft.query_range(2, 4) == 9);
 
   return 0;
 }
