@@ -7,3 +7,4 @@
 5. [C++ 中 `-9'223'372'036'854'775'808` 为何输出为正数？](notes/cpp-negative-integer-literal-output.md)
 6. [深入理解单链表与虚拟头节点的妙用](notes/deep-dive-linked-list-dummy-head.md)
 7. [C++ 异步编程基石：深入理解 `std::future`、`std::promise`、`std::packaged_task` 与 `std::async`](notes/cpp-async-foundations.md)
+8. [C++ 标准库并发同步原语详解](notes/cpp-concurrency-synchronization-primitives.md)
