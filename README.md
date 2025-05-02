@@ -6,3 +6,4 @@
 4. [树状数组/二元索引树 (Fenwick Tree / Binary Indexed Tree) 详解](notes/fenwick-tree-detailed-explanation.md)
 5. [C++ 中 `-9'223'372'036'854'775'808` 为何输出为正数？](notes/cpp-negative-integer-literal-output.md)
 6. [深入理解单链表与虚拟头节点的妙用](notes/deep-dive-linked-list-dummy-head.md)
+7. [C++ 异步编程基石：深入理解 `std::future`、`std::promise`、`std::packaged_task` 与 `std::async`](notes/cpp-async-foundations.md)
