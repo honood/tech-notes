@@ -12,3 +12,4 @@
 10. [C++20 智能指针新特性：深入解析 `std::make_unique_for_overwrite` 与 `std::make_shared_for_overwrite`](notes/cpp20-smart-ptr-for-overwrite.md)
 11. [C++ 内存布局探秘：从结构体地址访问成员数组](notes/accessing-members-from-struct-address.md)
 12. [深入解析 C++ 替换函数 (Replacement Functions)](notes/cpp-replacement-functions-deep-dive.md)
+13. [C++ 类成员 `operator new`：`static` 的必然性与历史演变](notes/cpp-class-operator-new-static-evolution.md)
