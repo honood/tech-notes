@@ -13,3 +13,4 @@
 11. [C++ 内存布局探秘：从结构体地址访问成员数组](notes/accessing-members-from-struct-address.md)
 12. [深入解析 C++ 替换函数 (Replacement Functions)](notes/cpp-replacement-functions-deep-dive.md)
 13. [C++ 类成员 `operator new`：`static` 的必然性与历史演变](notes/cpp-class-operator-new-static-evolution.md)
+14. [深入解析 C++ 类型转换：`_cast` 家族与标准库 API 全景](notes/cpp-cast-deep-dive.md)
