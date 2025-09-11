@@ -8,7 +8,7 @@
 6. [深入理解单链表与虚拟头节点的妙用](notes/deep-dive-linked-list-dummy-head.md)
 7. [C++ 异步编程基石：深入理解 `std::future`、`std::promise`、`std::packaged_task` 与 `std::async`](notes/cpp-async-foundations.md)
 8. [C++ 标准库并发同步原语详解](notes/cpp-concurrency-synchronization-primitives.md)
-9. [C++23 `std::out_ptr` 与 `std::inout_ptr`: 简化与 C API 的交互](notes/cpp23_out_inout_ptr.md)
+9. [C++23 `std::out_ptr` 与 `std::inout_ptr`: 简化与 C API 的交互](notes/cpp23-out-inout-ptr.md)
 10. [C++20 智能指针新特性：深入解析 `std::make_unique_for_overwrite` 与 `std::make_shared_for_overwrite`](notes/cpp20-smart-ptr-for-overwrite.md)
 11. [C++ 内存布局探秘：从结构体地址访问成员数组](notes/accessing-members-from-struct-address.md)
 12. [深入解析 C++ 替换函数 (Replacement Functions)](notes/cpp-replacement-functions-deep-dive.md)
