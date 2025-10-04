@@ -71,7 +71,7 @@
       return 0;
     }
     ```
-*   **风险：** 这是**最常见导致未定义行为**的 Type Punning 方法。它违反了 C 和 C++ 中的**[严格别名规则](https://en.cppreference.com/w/cpp/language/reinterpret_cast) ([Strict Aliasing Rule](https://gist.github.com/honood/87458dc051a790634392941b2753bb22))**。
+*   **风险：** 这是**最常见导致未定义行为**的 Type Punning 方法。它违反了 C 和 C++ 中的 **[严格别名规则](https://en.cppreference.com/w/cpp/language/reinterpret_cast) ([Strict Aliasing Rule](https://gist.github.com/honood/87458dc051a790634392941b2753bb22))**。
     *   **严格别名规则：** 这条规则告诉编译器，不同类型（不兼容类型）的指针通常不会指向（别名）同一块内存区域。编译器基于这个假设进行优化（比如重排指令、将变量缓存到寄存器）。当你通过强制转换的指针访问数据时，编译器可能不知道这块内存已经被修改，导致优化出错，程序产生错误结果、崩溃或看似“正常工作”但在不同编译器、优化级别下失败。
 
 ### 3.  **使用 `memcpy`（推荐的安全方法）**
