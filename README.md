@@ -19,3 +19,4 @@
 17. [浮点数在计算机中的表示法：深入 IEEE 754 标准](notes/ieee-754-floating-point-deep-dive.md)
 18. [C++ 类型系统深度剖析：函数类型、Lambda 转换与编译迷思](notes/cpp-function-types-pointers-and-lambdas.md)
 19. [深度解析：动态库在多进程环境下的内存共享机制](notes/dynamic-library-memory-sharing.md)
+20. [深入解析 C++ 透明函数对象 (Transparent Functors)](notes/cpp-transparent-functors.md)
