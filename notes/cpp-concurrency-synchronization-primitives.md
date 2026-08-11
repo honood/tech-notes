@@ -108,14 +108,16 @@ int main() {
 #include <mutex>
 #include <chrono>
 
+using namespace std::chrono_literals;
+
 std::timed_mutex timed_mtx{};
 
 void worker() {
   // 尝试锁定 100 毫秒
-  if (timed_mtx.try_lock_for(std::chrono::milliseconds{100})) {
+  if (timed_mtx.try_lock_for(100ms)) {
     std::cout << "Thread " << std::this_thread::get_id() << " acquired the lock." << std::endl;
     // 模拟工作
-    std::this_thread::sleep_for(std::chrono::milliseconds{200});
+    std::this_thread::sleep_for(200ms);
     timed_mtx.unlock(); // 注意：使用 try_lock_for 后需手动 unlock，除非配合 unique_lock
     std::cout << "Thread " << std::this_thread::get_id() << " released the lock." << std::endl;
   } else {
@@ -127,10 +129,10 @@ void worker() {
 void worker_with_unique_lock() {
   std::unique_lock<std::timed_mutex> lock{timed_mtx, std::defer_lock}; // 先不锁定
   // 尝试锁定 100 毫秒
-  if (lock.try_lock_for(std::chrono::milliseconds{100})) {
+  if (lock.try_lock_for(100ms)) {
      std::cout << "Thread " << std::this_thread::get_id() << " acquired the lock via unique_lock." << std::endl;
      // 模拟工作
-     std::this_thread::sleep_for(std::chrono::milliseconds{200});
+     std::this_thread::sleep_for(200ms);
      // unique_lock 在析构时会自动解锁
      std::cout << "Thread " << std::this_thread::get_id() << " releasing the lock via unique_lock." << std::endl;
   } else {
@@ -139,19 +141,24 @@ void worker_with_unique_lock() {
 }
 
 int main() {
-  std::lock_guard<std::timed_mutex> main_lock{timed_mtx}; // 主线程先持有锁
-  std::cout << "Main thread acquired the lock." << std::endl;
+  std::thread t1{};
+  std::thread t2{};
 
-  // std::thread t1{worker}; // 使用手动解锁的版本
-  // std::thread t2{worker};
-  std::thread t1{worker_with_unique_lock}; // 使用 RAII 版本
-  std::thread t2{worker_with_unique_lock};
+  {
+    std::lock_guard<std::timed_mutex> main_lock{timed_mtx}; // 主线程先持有锁
+    std::cout << "Main thread acquired the lock." << std::endl;
 
-  // 等待一段时间，让工作线程有机会尝试获取锁
-  std::this_thread::sleep_for(std::chrono::milliseconds{50});
+    // t1 = std::thread{worker}; // 使用手动解锁的版本
+    // t2 = std::thread{worker};
+    t1 = std::thread{worker_with_unique_lock}; // 使用 RAII 版本
+    t2 = std::thread{worker_with_unique_lock};
 
-  std::cout << "Main thread releasing the lock." << std::endl;
-  // lock_guard 析构时自动解锁
+    // 等待一段时间，让工作线程有机会尝试获取锁
+    std::this_thread::sleep_for(50ms);
+
+    std::cout << "Main thread releasing the lock." << std::endl;
+    // lock_guard 析构时自动解锁
+  }
 
   t1.join();
   t2.join();
