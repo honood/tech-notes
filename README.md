@@ -22,3 +22,4 @@
 20. [深入解析 C++ 透明函数对象 (Transparent Functors)](notes/cpp-transparent-functors.md)
 21. [C++ 的常量之旅：从 `const` 到 `consteval`](notes/cpp-const-keywords-deep-dive.md)
 22. [现代 C++ 函数返回值推导机制深度解析：从尾置类型到 `auto` 与 `decltype(auto)`](notes/cpp-return-type-deduction-auto-vs-decltype-auto.md)
+23. [现代 C++ 可调用实体体系与泛型调用机制深度解析](notes/modern-cpp-callable-entities-and-invocation-deep-dive.md)
